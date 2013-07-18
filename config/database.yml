@@ -1,0 +1,8 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: simple_chat_development
+  pool: 5
+  host: localhost
+  username: alexdavidow
+  password:

@@ -1,0 +1,58 @@
+var STARTING_CHANNEL = 'chatroom'
+var pusher;
+var channel;
+
+function receive_chat(data){
+  console.log(data);
+  var chats = $('#chats')
+
+  var new_div = $('<div>');
+
+  var new_chat_avatar = $('<img>')
+  new_chat_avatar.attr('src', data['avatar'])
+  new_chat_avatar.appendTo(new_div);
+
+  var new_chat = $('<p>')
+  new_chat.text(data['username']+ ': '+data['chat_text'])
+  new_chat.appendTo(new_div)
+
+  new_div.appendTo(chats);
+  $('#chat_input').val('')
+}
+
+function switch_channel(e){
+  var new_channel = $(this).val();
+  var new_channel_title = $(this).children(":selected").text();
+  unsubscribe_all();
+  pusher.subscribe(new_channel);
+  listen_for_messages(new_channel)
+  var chat_alert = $('<p>')
+  chat_alert.addClass('chat_alert')
+  chat_alert.text('Now subscribed to the '+new_channel_title+' channel')
+  $('#chats').append(chat_alert);
+}
+
+function unsubscribe_all(){
+  var channels = Object.keys(pusher.channels.channels)
+  $.each(channels, function(i, channel){
+    pusher.unsubscribe(channel);
+  })
+  return pusher.channels.channels;
+}
+
+function listen_for_messages(channel){
+  listening_channel = pusher.channels.channels[channel];
+  listening_channel.bind( 'message', receive_chat);
+}
+
+$(function(){
+  /*
+  * Note that we have moved the pusher creation into the application.html page body.
+  * For some reason Pusher.key can be read there, but not here...
+  * This is a Heroku-specific problem, ideally we'll figure out how to fix it and get our
+  * pusher initialization back into a js file.
+  */
+  pusher.subscribe(STARTING_CHANNEL);
+  listen_for_messages(STARTING_CHANNEL);
+  $('#channel').on('change', switch_channel);
+})
