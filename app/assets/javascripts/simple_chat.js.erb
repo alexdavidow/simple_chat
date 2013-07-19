@@ -16,7 +16,7 @@ function receive_chat(data){
   new_chat.text(data['username']+ ': '+data['chat_text'])
   new_chat.appendTo(new_div)
 
-  new_div.appendTo(chats);
+  new_div.prependTo(chats);
   $('#chat_input').val('')
 }
 
@@ -29,7 +29,7 @@ function switch_channel(e){
   var chat_alert = $('<p>')
   chat_alert.addClass('chat_alert')
   chat_alert.text('Now subscribed to the '+new_channel_title+' channel')
-  $('#chats').append(chat_alert);
+  $('#chats').prepend(chat_alert);
 }
 
 function unsubscribe_all(){

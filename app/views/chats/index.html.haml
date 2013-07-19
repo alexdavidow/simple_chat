@@ -1,4 +1,4 @@
-%h1 Chat home!
+%h1 Chat away!
 
 - if current_user.present?
   %h4#user-info
@@ -8,8 +8,8 @@
   #chats
   = form_tag(send_chat_path, id: 'chat-form', remote: true) do
     = select_tag 'channel', options_for_select([['Chatroom', 'chatroom'], ['Sports', 'sports'], ['Today with Tanay', 'todaywithtanay'], ['Studio 2', 'studio2']])
-    = text_field_tag 'chat_input'
-    = submit_tag 'Chat!'
+    .nine.columns= text_field_tag 'chat_input'
+    .three.columns= submit_tag 'Chat!'
 - else
   = link_to 'Please log in', sessions_new_path 
   %p or
