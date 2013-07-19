@@ -9,10 +9,10 @@
   %body
     %nav
       %ul
-        %li= link_to 'Chatroom', root_path
-        %li= link_to 'New User', users_new_path
-        %li= link_to 'Returning User', sessions_new_path
-        %li= link_to 'logout', logout_path, method: 'DELETE'
+        %li.button= link_to 'Chatroom', root_path
+        %li.button= link_to 'New User', users_new_path
+        %li.button= link_to 'Returning User', sessions_new_path
+        %li.button= link_to 'Logout', logout_path, method: 'DELETE'
     :javascript
       pusher = new Pusher("#{Pusher.key}");
     = yield
