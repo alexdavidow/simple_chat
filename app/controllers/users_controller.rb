@@ -7,9 +7,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      user = User.find_by_username(params[:username])
-      authenticated_user = user.authenticate(params[:password]) if user
-      session[:user_id] = authenticated_user.id
+      # user = User.find_by_username(params[:username])
+      # authenticated_user = user.authenticate(params[:password]) if user
+      session[:user_id] = @user.id
       redirect_to root_path
     else
       render :new

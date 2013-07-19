@@ -15,4 +15,5 @@
         %li.button= link_to 'Logout', logout_path, method: 'DELETE'
     :javascript
       pusher = new Pusher("#{Pusher.key}");
-    = yield
+    .container
+      = yield
