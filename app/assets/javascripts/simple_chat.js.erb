@@ -29,7 +29,9 @@ function switch_channel(e){
   var chat_alert = $('<p>')
   chat_alert.addClass('chat_alert')
   chat_alert.text('Now subscribed to the '+new_channel_title+' channel')
+  $('#chats').empty()
   $('#chats').prepend(chat_alert);
+
 }
 
 function unsubscribe_all(){
