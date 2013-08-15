@@ -24,12 +24,12 @@ function switch_channel(e){
   var new_channel = $(this).val();
   var new_channel_title = $(this).children(":selected").text();
   unsubscribe_all();
+  $('#chats').empty()
   pusher.subscribe(new_channel);
   listen_for_messages(new_channel)
   var chat_alert = $('<p>')
   chat_alert.addClass('chat_alert')
   chat_alert.text('Now subscribed to the '+new_channel_title+' channel')
-  $('#chats').empty()
   $('#chats').prepend(chat_alert);
 
 }
